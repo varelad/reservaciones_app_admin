@@ -1,0 +1,45 @@
+import QtQuick
+import QtQuick.Controls
+
+ScrollablePage {
+    id: page
+
+    readonly property int itemWidth: Math.max(button.implicitWidth, Math.min(button.implicitWidth * 3, page.availableWidth / 3 * 2))
+
+    Column {
+        spacing: 40
+        width: parent.width
+
+        Label {
+            width: parent.width
+            wrapMode: Label.Wrap
+            horizontalAlignment: Qt.AlignHCenter
+            text: qsTr("A GroupBox provides a frame, a title on top of it, and a logical group of controls within that frame.")
+        }
+
+        GroupBox {
+            title: qsTr("Title")
+            anchors.horizontalCenter: parent.horizontalCenter
+
+            Column {
+                spacing: 20
+                width: page.itemWidth
+
+                RadioButton {
+                    text: qsTr("First")
+                    checked: true
+                    width: parent.width
+                }
+                RadioButton {
+                    id: button
+                    text: qsTr("Second")
+                    width: parent.width
+                }
+                RadioButton {
+                    text: qsTr("Third")
+                    width: parent.width
+                }
+            }
+        }
+    }
+}

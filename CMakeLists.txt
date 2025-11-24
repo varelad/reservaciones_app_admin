@@ -17,7 +17,11 @@ qt_add_qml_module(appreservaciones_app_admin
     QML_FILES
         Main.qml
         QML_FILES TooBar.qml
+        QML_FILES
+        RESOURCES
         QML_FILES MisClases.qml
+        QML_FILES ScrollablePage.qml
+        QML_FILES Alumnos.qml
 )
 
 # Qt for iOS sets MACOSX_BUNDLE_GUI_IDENTIFIER automatically since Qt 6.1.

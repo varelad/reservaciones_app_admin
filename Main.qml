@@ -3,6 +3,8 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls
 
+import "." as App
+
 ApplicationWindow {
     id: window
     width: 360
@@ -19,11 +21,11 @@ ApplicationWindow {
         property string style
     }
 
-    Shortcut {
+    /*Shortcut {
         sequences: ["Esc", "Back"]
         enabled: stackView.depth > 1
         onActivated: navigateBackAction.trigger()
-    }
+    }*/
 
     Shortcut {
         sequence: StandardKey.HelpContents
@@ -34,12 +36,13 @@ ApplicationWindow {
         id: navigateBackAction
         icon.name: stackView.depth > 1 ? "back" : "drawer"
         onTriggered: {
-            if (stackView.depth > 1) {
+            drawer.open()
+            /*if (stackView.depth > 1) {
                 stackView.pop()
                 listView.currentIndex = -1
             } else {
                 drawer.open()
-            }
+            }*/
         }
     }
 
@@ -49,7 +52,7 @@ ApplicationWindow {
         onTriggered: optionsMenu.open()
     }
 
-    header: ToolBar {
+    header: App.TooBar {
         RowLayout {
             spacing: 20
             anchors.fill: parent
@@ -101,7 +104,7 @@ ApplicationWindow {
         width: Math.min(window.width, window.height) / 3 * 2
         height: window.height
         modal: window.portraitMode
-        interactive: window.portraitMode ? (stackView.depth === 1) : false
+        //interactive: window.portraitMode ? (stackView.depth === 1) : false
         position: window.portraitMode ? 0 : 1
         visible: !window.portraitMode
 
@@ -113,7 +116,8 @@ ApplicationWindow {
             anchors.fill: parent
 
             model: ListModel {
-                ListElement { title: qsTr("Mis Clases"); source: "qrc:/MisClases.qml" }
+                ListElement { title: qsTr("Mis Clases"); source: "MisClases.qml" }
+                ListElement { title: qsTr("Alumnos"); source: "Alumnos.qml" }
             }
 
             delegate: ItemDelegate {
