@@ -82,6 +82,11 @@ ApplicationWindow {
                     transformOrigin: Menu.TopRight
 
                     Action {
+                        text: qsTr("Login")
+                        onTriggered: loginDialog.open()
+                    }
+
+                    Action {
                         text: qsTr("Settings")
                         onTriggered: settingsDialog.open()
                     }
@@ -181,6 +186,43 @@ ApplicationWindow {
                 anchors.bottom: parent.bottom
                 visible: window.portraitMode
             }
+        }
+    }
+
+    Dialog {
+        id:loginDialog
+        x: Math.round((window.width - width) / 2)
+        y: Math.round(window.height / 6)
+        modal: true
+        focus: true
+        title: qsTr("Iniciar sesión")
+
+        standardButtons: Dialog.Ok | Dialog.Cancel
+        onAccepted: {
+            settings.style = styleBox.displayText
+            loginDialog.close()
+        }
+        onRejected: {
+            styleBox.currentIndex = styleBox.styleIndex
+            loginDialog.close()
+        }
+
+        contentItem: ColumnLayout {
+            id: loginColumn
+            spacing: 20
+
+            GridLayout{
+                columnSpacing: 5
+                Label {
+                    text: qsTr("cel +52: ")
+                }
+                TextInput {
+                    id: loginNumber
+                    Layout.fillWidth: true
+
+                }
+            }
+
         }
     }
 
